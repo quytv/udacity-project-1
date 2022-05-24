@@ -1,0 +1,39 @@
+{
+  "variables": {
+    "subscription_id": "{{env `AZ_SUSCRIPTION_ID`}}",
+    "client_id": "{{env `AZ_CLIENT_ID`}}",
+    "client_secret": "{{env `AZ_CLIENT_SECRET`}}"
+  },
+	"builders": [
+    {
+      "type": "azure-arm",
+      "client_id": "{{user `client_id`}}",
+      "client_secret": "{{user `client_secret`}}",
+      "subscription_id": "{{user `subscription_id`}}",
+      "tenant_id": "{{user `tenant_id`}}",
+
+      "os_type": "Linux",
+      "image_publisher": "Canonical",
+      "image_offer": "UbuntuServer",
+      "image_sku": "18.04-LTS",
+
+      "location": "East US 2",
+      "vm_size": "Standard_E2bds_v5",
+
+      "managed_image_resource_group_name": "udacity-quytran",
+      "managed_image_name": "packerUdacityQuytran",
+
+      "azure_tags": {
+        "enviroments": "Test"
+      }
+    }
+  ],
+	"provisioners": [{
+    "inline": [
+      "echo 'Hello, World!' > index.html",
+      "nohup busybox httpd -f -p 80 &"
+    ],
+		"inline_shebang": "/bin/sh -x",
+		"type": "shell"
+	}]
+}

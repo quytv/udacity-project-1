@@ -1,0 +1,98 @@
+bash-5.1# packer build packer/server.json
+azure-arm: output will be in this color.
+
+==> azure-arm: Running builder ...
+==> azure-arm: Getting tokens using client secret
+==> azure-arm: Getting tokens using client secret
+    azure-arm: Creating Azure Resource Manager (ARM) client ...
+==> azure-arm: WARNING: Zone resiliency may not be supported in East US 2, checkout the docs at https://docs.microsoft.com/en-us/azure/availability-zones/
+==> azure-arm: Getting source image id for the deployment ...
+==> azure-arm:  -> SourceImageName: '/subscriptions/745082d1-7212-46df-bc06-d2612de9de33/providers/Microsoft.Compute/locations/East US 2/publishers/Canonical/ArtifactTypes/vmimage/offers/UbuntuServer/skus/18.04-LTS/versions/latest'
+==> azure-arm: Creating resource group ...
+==> azure-arm:  -> ResourceGroupName : 'pkr-Resource-Group-w2ffrai808'
+==> azure-arm:  -> Location          : 'East US 2'
+==> azure-arm:  -> Tags              :
+==> azure-arm:  ->> enviroments : Test
+==> azure-arm: Validating deployment template ...
+==> azure-arm:  -> ResourceGroupName : 'pkr-Resource-Group-w2ffrai808'
+==> azure-arm:  -> DeploymentName    : 'pkrdpw2ffrai808'
+==> azure-arm: Deploying deployment template ...
+==> azure-arm:  -> ResourceGroupName : 'pkr-Resource-Group-w2ffrai808'
+==> azure-arm:  -> DeploymentName    : 'pkrdpw2ffrai808'
+==> azure-arm:
+==> azure-arm: Getting the VM's IP address ...
+==> azure-arm:  -> ResourceGroupName   : 'pkr-Resource-Group-w2ffrai808'
+==> azure-arm:  -> PublicIPAddressName : 'pkripw2ffrai808'
+==> azure-arm:  -> NicName             : 'pkrniw2ffrai808'
+==> azure-arm:  -> Network Connection  : 'PublicEndpoint'
+==> azure-arm:  -> IP Address          : '20.230.83.142'
+==> azure-arm: Waiting for SSH to become available...
+==> azure-arm: Connected to SSH!
+==> azure-arm: Provisioning with shell script: /tmp/packer-shell615330872
+==> azure-arm: + echo Hello, World!
+==> azure-arm: + nohup busybox httpd -f -p 80
+==> azure-arm: Querying the machine's properties ...
+==> azure-arm:  -> ResourceGroupName : 'pkr-Resource-Group-w2ffrai808'
+==> azure-arm:  -> ComputeName       : 'pkrvmw2ffrai808'
+==> azure-arm:  -> Managed OS Disk   : '/subscriptions/745082d1-7212-46df-bc06-d2612de9de33/resourceGroups/pkr-Resource-Group-w2ffrai808/providers/Microsoft.Compute/disks/pkrosw2ffrai808'
+==> azure-arm: Querying the machine's additional disks properties ...
+==> azure-arm:  -> ResourceGroupName : 'pkr-Resource-Group-w2ffrai808'
+==> azure-arm:  -> ComputeName       : 'pkrvmw2ffrai808'
+==> azure-arm: Powering off machine ...
+==> azure-arm:  -> ResourceGroupName : 'pkr-Resource-Group-w2ffrai808'
+==> azure-arm:  -> ComputeName       : 'pkrvmw2ffrai808'
+==> azure-arm: Capturing image ...
+==> azure-arm:  -> Compute ResourceGroupName : 'pkr-Resource-Group-w2ffrai808'
+==> azure-arm:  -> Compute Name              : 'pkrvmw2ffrai808'
+==> azure-arm:  -> Compute Location          : 'East US 2'
+==> azure-arm:  -> Image ResourceGroupName   : 'udacity-quytran'
+==> azure-arm:  -> Image Name                : 'packerUdacityQuytran'
+==> azure-arm:  -> Image Location            : 'East US 2'
+==> azure-arm:
+==> azure-arm: Deleting individual resources ...
+==> azure-arm: Adding to deletion queue -> Microsoft.Compute/virtualMachines : 'pkrvmw2ffrai808'
+==> azure-arm: Adding to deletion queue -> Microsoft.Network/networkInterfaces : 'pkrniw2ffrai808'
+==> azure-arm: Adding to deletion queue -> Microsoft.Network/publicIPAddresses : 'pkripw2ffrai808'
+==> azure-arm: Adding to deletion queue -> Microsoft.Network/virtualNetworks : 'pkrvnw2ffrai808'
+==> azure-arm: Attempting deletion -> Microsoft.Network/virtualNetworks : 'pkrvnw2ffrai808'
+==> azure-arm: Waiting for deletion of all resources...
+==> azure-arm: Attempting deletion -> Microsoft.Compute/virtualMachines : 'pkrvmw2ffrai808'
+==> azure-arm: Attempting deletion -> Microsoft.Network/publicIPAddresses : 'pkripw2ffrai808'
+==> azure-arm: Attempting deletion -> Microsoft.Network/networkInterfaces : 'pkrniw2ffrai808'
+==> azure-arm: Error deleting resource. Will retry.
+==> azure-arm: Name: pkrvnw2ffrai808
+==> azure-arm: Error: network.VirtualNetworksClient#Delete: Failure sending request: StatusCode=0 -- Original Error: Code="InUseSubnetCannotBeDeleted" Message="Subnet pkrsnw2ffrai808 is in use by /subscriptions/745082d1-7212-46df-bc06-d2612de9de33/resourceGroups/pkr-Resource-Group-w2ffrai808/providers/Microsoft.Network/networkInterfaces/pkrniw2ffrai808/ipConfigurations/ipconfig and cannot be deleted. In order to delete the subnet, delete all the resources within the subnet. See aka.ms/deletesubnet." Details=[]
+==> azure-arm:
+==> azure-arm: Error deleting resource. Will retry.
+==> azure-arm: Name: pkrniw2ffrai808
+==> azure-arm: Error: network.InterfacesClient#Delete: Failure sending request: StatusCode=0 -- Original Error: Code="NicInUse" Message="Network Interface /subscriptions/745082d1-7212-46df-bc06-d2612de9de33/resourceGroups/pkr-Resource-Group-w2ffrai808/providers/Microsoft.Network/networkInterfaces/pkrniw2ffrai808 is used by existing resource /subscriptions/745082d1-7212-46df-bc06-d2612de9de33/resourceGroups/pkr-Resource-Group-w2ffrai808/providers/Microsoft.Compute/virtualMachines/pkrvmw2ffrai808. In order to delete the network interface, it must be dissociated from the resource. To learn more, see aka.ms/deletenic." Details=[]
+==> azure-arm:
+==> azure-arm: Error deleting resource. Will retry.
+==> azure-arm: Name: pkripw2ffrai808
+==> azure-arm: Error: network.PublicIPAddressesClient#Delete: Failure sending request: StatusCode=0 -- Original Error: Code="PublicIPAddressCannotBeDeleted" Message="Public IP address /subscriptions/745082d1-7212-46df-bc06-d2612de9de33/resourceGroups/pkr-Resource-Group-w2ffrai808/providers/Microsoft.Network/publicIPAddresses/pkripw2ffrai808 can not be deleted since it is still allocated to resource /subscriptions/745082d1-7212-46df-bc06-d2612de9de33/resourceGroups/pkr-Resource-Group-w2ffrai808/providers/Microsoft.Network/networkInterfaces/pkrniw2ffrai808/ipConfigurations/ipconfig. In order to delete the public IP, disassociate/detach the Public IP address from the resource.  To learn how to do this, see aka.ms/deletepublicip." Details=[]
+==> azure-arm:
+==> azure-arm: Attempting deletion -> Microsoft.Network/virtualNetworks : 'pkrvnw2ffrai808'
+==> azure-arm: Attempting deletion -> Microsoft.Network/networkInterfaces : 'pkrniw2ffrai808'
+==> azure-arm: Error deleting resource. Will retry.
+==> azure-arm: Name: pkrvnw2ffrai808
+==> azure-arm: Error: network.VirtualNetworksClient#Delete: Failure sending request: StatusCode=0 -- Original Error: Code="InUseSubnetCannotBeDeleted" Message="Subnet pkrsnw2ffrai808 is in use by /subscriptions/745082d1-7212-46df-bc06-d2612de9de33/resourceGroups/pkr-Resource-Group-w2ffrai808/providers/Microsoft.Network/networkInterfaces/pkrniw2ffrai808/ipConfigurations/ipconfig and cannot be deleted. In order to delete the subnet, delete all the resources within the subnet. See aka.ms/deletesubnet." Details=[]
+==> azure-arm:
+==> azure-arm: Attempting deletion -> Microsoft.Network/publicIPAddresses : 'pkripw2ffrai808'
+==> azure-arm: Attempting deletion -> Microsoft.Network/virtualNetworks : 'pkrvnw2ffrai808'
+==> azure-arm:  Deleting -> Microsoft.Compute/disks : '/subscriptions/745082d1-7212-46df-bc06-d2612de9de33/resourceGroups/pkr-Resource-Group-w2ffrai808/providers/Microsoft.Compute/disks/pkrosw2ffrai808'
+==> azure-arm: Removing the created Deployment object: 'pkrdpw2ffrai808'
+==> azure-arm:
+==> azure-arm: Cleanup requested, deleting resource group ...
+==> azure-arm: Resource group has been deleted.
+Build 'azure-arm' finished after 6 minutes 26 seconds.
+
+==> Wait completed after 6 minutes 26 seconds
+
+==> Builds finished. The artifacts of successful builds are:
+--> azure-arm: Azure.ResourceManagement.VMImage:
+
+OSType: Linux
+ManagedImageResourceGroupName: udacity-quytran
+ManagedImageName: packerUdacityQuytran
+ManagedImageId: /subscriptions/745082d1-7212-46df-bc06-d2612de9de33/resourceGroups/udacity-quytran/providers/Microsoft.Compute/images/packerUdacityQuytran
+ManagedImageLocation: East US 2
